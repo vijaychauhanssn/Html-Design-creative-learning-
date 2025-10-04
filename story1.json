@@ -1,0 +1,20 @@
+{
+  "title": "A Day in Nature",
+  "publisher": "My Site",
+  "poster": "https://picsum.photos/720/1280",
+  "logo": "https://example.com/logo.png",
+  "pages": [
+    {
+      "id": "p1",
+      "image": "https://picsum.photos/id/1015/720/1280",
+      "title": "Morning View",
+      "text": "The sun is rising."
+    },
+    {
+      "id": "p2",
+      "image": "https://picsum.photos/id/1016/720/1280",
+      "title": "Into the Forest",
+      "text": "Let\u2019s take a walk."
+    }
+  ]
+}
