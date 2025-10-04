@@ -1,0 +1,12 @@
+{
+  "name": "angular-amp-stories",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "echo 'Run Angular CLI build (not included in this template)'",
+    "build:ssr": "echo 'Run Angular Universal build (not included in this template)'",
+    "serve:ssr": "node dist/server/main.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
