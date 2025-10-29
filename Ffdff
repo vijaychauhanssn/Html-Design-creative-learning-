@@ -1,0 +1,66 @@
+Skip to content
+
+ChatGPT
+
+Log in
+You said:
+Uploaded image
+Can  provide list content data in tables 
+ChatGPT said:
+Here’s the data from your image, organized into a clear table format:
+
+Package / Component	Version	CVE ID	Vulnerability Type / Description
+@Angular/Core	17.3.10	CVE-2024-21490	Inefficient Regular Expression Complexity
+Moment	2.29.3	CVE-2022-31129	Uncontrolled Resource Consumption
+Axios	1.7.7	CVE-2023-27552	Server Side Request Forgery (SSRF)
+Axios	1.7.7	CVE-2023-38754	Allocation of Resources Without Limits or Throttling
+Express	4.19.2	CVE-2024-43796	Improper Neutralization of Input During Web Page Generation (Cross-site Scripting)
+@Angular/Core	17.3.10	CVE-2022-25869	Improper Neutralization of Input During Web Page Generation (Cross-site Scripting)
+Would you like me to also include severity ratings (e.g., CVSS scores) for these CVEs? I can fetch them from the NVD (National Vulnerability Database).
+
+You said:
+Yes
+ChatGPT said:
+Here’s an updated table including the CVSS (or available severity scores) for each vulnerability from your list:
+
+Package / Component	Version	CVE ID	Vulnerability Type / Description	CVSS Base Score
+@Angular/Core	17.3.10	CVE-2024-21490	Inefficient Regular Expression Complexity (catastrophic back-tracking DoS)	7.5 (High) — vector CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H 
+SUSE
++2
+Rapid7
++2
+Moment	2.29.3	CVE-2022-31129	Uncontrolled Resource Consumption via inefficient parsing algorithm (ReDoS)	7.5 (High) — vector CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H 
+IBM
++2
+NVD
++2
+Axios	1.7.7	CVE-2023-27552	Server Side Request Forgery (SSRF)	Score not found / not publicly listed
+Axios	1.7.7	CVE-2023-38754	Allocation of Resources Without Limits or Throttling	Score not found / not publicly listed
+Express	4.19.2	CVE-2024-43796	Improper Neutralization of Input During Web Page Generation (Cross-site Scripting)	4.7 (Medium) — vector CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:L/I:L/A:N 
+wiz.io
+@Angular/Core	17.3.10	CVE-2022-25869	Improper Neutralization of Input During Web Page Generation (XSS)	4.2 (Medium) — vector CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:N 
+Ubuntu
++1
+Notes & caveats:
+
+For the two CVEs (CVE-2023-27552 and CVE-2023-38754) associated with Axios, I was unable to find publicly cited CVSS base score information in the sources I checked.
+
+Some CVSS scores come from vendor bulletins or third-party sources rather than directly from the NVD and thus may differ slightly or later be updated.
+
+CVSS is just one dimension of risk (e.g., exploitability, environment, exposure also matter).
+
+If you like, I can check further for the missing CVSS scores (for the Axios CVEs) and also fetch temporal or environmental scores where available.
+
+
+Can provide all 
+
+Attach
+
+Search
+
+Study
+
+Create image
+
+No file chosenNo file chosen
+ChatGPT can make mistakes. Check important info. See Cookie Preferences.
