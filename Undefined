@@ -1,0 +1,91 @@
+Step 1 — Create a global defaultValue pipe
+This pipe safely replaces any undefined or null value with a fallback (blank, "N/A", etc.), and works across all components.
+📄 src/app/shared/pipes/default-value.pipe.ts
+import { Pipe, PipeTransform, inject } from '@angular/core';
+import { DEFAULT_FALLBACK } from './pipe.config';
+
+@Pipe({
+  name: 'defaultValue',
+  standalone: true,
+})
+export class DefaultValuePipe implements PipeTransform {
+  private globalFallback = inject(DEFAULT_FALLBACK, { optional: true }) ?? '';
+
+  transform(value: any, fallback: string = this.globalFallback): any {
+    return value === undefined || value === null ? fallback : value;
+  }
+}
+
+📄 src/app/shared/pipes/pipe.config.ts
+import { InjectionToken } from '@angular/core';
+
+export const DEFAULT_FALLBACK = new InjectionToken<string>('DEFAULT_FALLBACK', {
+  providedIn: 'root',
+  factory: () => '', // global default (can override below)
+});
+
+📄 src/app/shared/pipes/index.ts
+export * from './default-value.pipe';
+export * from './pipe.config';
+
+
+⚙️ Step 2 — Register it once in main.ts
+This makes it globally available without importing in each component.
+📄 src/main.ts
+import { bootstrapApplication, importProvidersFrom } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { provideRouter } from '@angular/router';
+import * as SharedPipes from './app/shared/pipes';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter([]),
+    importProvidersFrom(SharedPipes.DefaultValuePipe),
+    { provide: SharedPipes.DEFAULT_FALLBACK, useValue: '--' }, // global fallback
+  ],
+});
+
+Now every component template can safely do:
+{{ user?.name | defaultValue }}
+{{ abc | defaultValue:'N/A' }}
+{{ email | defaultValue }}
+
+…and you’ll never see undefined, null, or truthy expression warnings.
+
+🧰 Step 3 — Make your linter happy
+Angular 19’s template type checker can flag “always truthy” literal expressions.
+If those appear from third-party templates or legacy code, you can suppress globally (not recommended unless needed):
+📄 angular.json
+"angularCompilerOptions": {
+  "strictTemplates": true,
+  "suppressTemplateTypeChecks": ["alwaysTruth"]
+}
+
+
+⚠️ Only use this if you truly must silence those warnings globally; the pipe approach is cleaner.
+
+
+🚀 Step 4 — (Optionally) enforce fallback via global helper
+If you prefer to never type the pipe in templates, you can wrap data display in a utility function used in all components:
+📄 src/app/shared/utils/default.util.ts
+export function safe<T>(value: T | null | undefined, fallback: any = ''): T | any {
+  return value ?? fallback;
+}
+
+Then use in your .ts:
+label = safe(this.user?.name, '--');
+
+So even programmatic displays (not just templates) behave consistently.
+
+✅ Final setup summary
+ConcernGlobal FixExampleundefined or null text showingdefaultValue pipe`{{ value“always truthy” warningsAvoid literal expressions or use pipe✅ no warningNeed fallback across appSet DEFAULT_FALLBACK in main.ts'--', 'N/A', etc.Future extensibilityAdd more pipes (truncate, safeHtml, etc.)Import once globally
+
+🧠 TL;DR
+✅ Add global DefaultValuePipe
+✅ Register once in main.ts
+✅ Use it anywhere → {{ field | defaultValue }}
+✅ Optional: override global fallback text
+✅ No need to touch 100+ components again
+
+Would you like me to show how to automatically apply this pipe to all string interpolations using a codemod (AST script) — so that existing templates are upgraded in one go?
+It can scan your src/**/*.html and insert | defaultValue automatically.
